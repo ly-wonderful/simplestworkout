@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Xcode user state
+*.xcuserstate
+xcuserdata/
+
+# Build products
+build/
+DerivedData/
+
+# Swift Package Manager cache
+.build/
+SourcePackages/
+
+# Firebase credentials — add manually per device
+GoogleService-Info.plist
