@@ -5,6 +5,7 @@ struct PlansListView: View {
     @Environment(DataStore.self) private var dataStore
     @State private var plansViewModel: PlansViewModel?
     @State private var showEditor = false
+    @State private var showGenerator = false
 
     var body: some View {
         NavigationStack {
@@ -18,14 +19,24 @@ struct PlansListView: View {
             .navigationTitle("My Plans")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button { showEditor = true } label: {
-                        Image(systemName: "plus")
+                    HStack {
+                        Button { showGenerator = true } label: {
+                            Image(systemName: "wand.and.stars")
+                        }
+                        Button { showEditor = true } label: {
+                            Image(systemName: "plus")
+                        }
                     }
                 }
             }
             .sheet(isPresented: $showEditor) {
                 if let vm = plansViewModel {
                     PlanEditorView(mode: .create, plansViewModel: vm)
+                }
+            }
+            .sheet(isPresented: $showGenerator) {
+                if let vm = plansViewModel {
+                    WorkoutGeneratorView(plansViewModel: vm)
                 }
             }
         }

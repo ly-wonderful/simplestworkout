@@ -54,4 +54,24 @@ final class DataStore {
     func save() throws {
         try context.save()
     }
+
+    // MARK: - Weight Logs
+
+    func fetchWeightLogs(for userId: String) throws -> [WeightLog] {
+        let descriptor = FetchDescriptor<WeightLog>(
+            predicate: #Predicate { $0.userId == userId },
+            sortBy: [SortDescriptor(\.date, order: .reverse)]
+        )
+        return try context.fetch(descriptor)
+    }
+
+    func insertWeightLog(_ log: WeightLog) throws {
+        context.insert(log)
+        try context.save()
+    }
+
+    func deleteWeightLog(_ log: WeightLog) throws {
+        context.delete(log)
+        try context.save()
+    }
 }

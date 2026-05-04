@@ -9,6 +9,12 @@ struct SessionDetailView: View {
                 LabeledContent("Date", value: session.startedAt.formatted(date: .long, time: .shortened))
                 LabeledContent("Duration", value: session.formattedDuration)
                 LabeledContent("Exercises", value: "\(session.loggedExercises.count)")
+                if let feeling = session.feeling {
+                    LabeledContent("Feeling", value: "\(feeling.emoji) \(feeling.label)")
+                }
+                if let notes = session.sessionNotes, !notes.isEmpty {
+                    LabeledContent("Notes", value: notes)
+                }
             }
 
             ForEach(session.loggedExercises) { exercise in

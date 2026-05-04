@@ -5,6 +5,8 @@ import Observation
 @MainActor
 final class SessionViewModel {
     var currentSession: WorkoutSession?
+    var selectedFeeling: WorkoutFeeling? = nil
+    var sessionNotes: String = ""
     var isComplete: Bool = false
     var errorMessage: String? = nil
 
@@ -35,6 +37,8 @@ final class SessionViewModel {
     func completeSession() {
         guard let session = currentSession else { return }
         session.completedAt = Date()
+        session.feeling = selectedFeeling
+        session.sessionNotes = sessionNotes.isEmpty ? nil : sessionNotes
         do {
             try dataStore.insertSession(session)
             currentSession = nil

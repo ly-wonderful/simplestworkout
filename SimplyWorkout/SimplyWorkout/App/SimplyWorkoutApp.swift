@@ -10,7 +10,7 @@ struct SimplyWorkoutApp: App {
 
     init() {
         FirebaseApp.configure()
-        let schema = Schema([WorkoutPlan.self, Exercise.self, WorkoutSession.self, LoggedExercise.self])
+        let schema = Schema([WorkoutPlan.self, Exercise.self, WorkoutSession.self, LoggedExercise.self, WeightLog.self])
         do {
             let c = try ModelContainer(for: schema)
             container = c

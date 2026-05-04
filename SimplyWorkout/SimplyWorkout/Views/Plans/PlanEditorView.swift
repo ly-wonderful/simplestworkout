@@ -42,6 +42,7 @@ struct PlanEditorView: View {
                         .padding(.vertical, 4)
                     }
                     .onDelete { exercises.remove(atOffsets: $0) }
+                    .onMove { exercises.move(fromOffsets: $0, toOffset: $1) }
 
                     Button {
                         exercises.append(ExerciseDraft())
@@ -49,6 +50,7 @@ struct PlanEditorView: View {
                         Label("Add Exercise", systemImage: "plus.circle")
                     }
                 }
+                .environment(\.editMode, .constant(.active))
 
                 if let error = errorMessage {
                     Section {

@@ -15,6 +15,7 @@ struct ActiveSessionView: View {
                         ForEach(session.loggedExercises) { exercise in
                             exerciseSection(exercise: exercise)
                         }
+                        wrapUpSection
                     }
                 } else {
                     ProgressView()
@@ -89,6 +90,26 @@ struct ActiveSessionView: View {
                     .buttonStyle(.borderedProminent)
                     .controlSize(.small)
             }
+        }
+    }
+
+    @ViewBuilder
+    private var wrapUpSection: some View {
+        Section("Wrap Up") {
+            Picker("Feeling", selection: Binding(
+                get: { sessionViewModel.selectedFeeling },
+                set: { sessionViewModel.selectedFeeling = $0 }
+            )) {
+                Text("Not rated").tag(Optional<WorkoutFeeling>.none)
+                ForEach(WorkoutFeeling.allCases, id: \.self) { feeling in
+                    Text("\(feeling.emoji) \(feeling.label)").tag(Optional(feeling))
+                }
+            }
+            TextField("Session notes", text: Binding(
+                get: { sessionViewModel.sessionNotes },
+                set: { sessionViewModel.sessionNotes = $0 }
+            ), axis: .vertical)
+            .lineLimit(2...5)
         }
     }
 

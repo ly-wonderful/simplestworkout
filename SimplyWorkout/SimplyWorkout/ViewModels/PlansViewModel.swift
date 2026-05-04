@@ -64,6 +64,22 @@ final class PlansViewModel {
             errorMessage = "Failed to delete plan."
         }
     }
+
+    func generatePlans(from templates: [WorkoutTemplate]) throws {
+        for template in templates {
+            let plan = WorkoutPlan(userId: userId, name: template.name)
+            for draft in template.exercises {
+                plan.exercises.append(Exercise(
+                    name: draft.name,
+                    targetSets: draft.targetSets,
+                    targetReps: draft.targetReps,
+                    notes: draft.notes.isEmpty ? nil : draft.notes
+                ))
+            }
+            try dataStore.insertPlan(plan)
+        }
+        loadPlans()
+    }
 }
 
 struct ExerciseDraft: Identifiable {
@@ -72,4 +88,10 @@ struct ExerciseDraft: Identifiable {
     var targetSets: Int = 3
     var targetReps: Int = 10
     var notes: String = ""
+}
+
+struct WorkoutTemplate: Identifiable {
+    let id = UUID()
+    let name: String
+    let exercises: [ExerciseDraft]
 }

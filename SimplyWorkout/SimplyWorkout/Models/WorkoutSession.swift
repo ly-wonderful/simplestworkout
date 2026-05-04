@@ -9,6 +9,8 @@ final class WorkoutSession {
     var planName: String
     var startedAt: Date
     var completedAt: Date?
+    var feeling: WorkoutFeeling?
+    var sessionNotes: String?
     @Relationship(deleteRule: .cascade) var loggedExercises: [LoggedExercise]
 
     init(userId: String, planId: UUID, planName: String) {
@@ -18,6 +20,8 @@ final class WorkoutSession {
         self.planName = planName
         self.startedAt = Date()
         self.completedAt = nil
+        self.feeling = nil
+        self.sessionNotes = nil
         self.loggedExercises = []
     }
 

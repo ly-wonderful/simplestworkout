@@ -12,7 +12,7 @@ final class AuthViewModel {
     var errorMessage: String? = nil
 
     private let authService = AuthService.shared
-    private var listenerHandle: AuthStateDidChangeListenerHandle?
+    nonisolated(unsafe) private var listenerHandle: AuthStateDidChangeListenerHandle?
 
     init() {
         listenerHandle = authService.addAuthStateListener { [weak self] user in
