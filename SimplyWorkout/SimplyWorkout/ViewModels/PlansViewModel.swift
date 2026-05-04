@@ -27,8 +27,8 @@ final class PlansViewModel {
         isLoading = false
     }
 
-    func createPlan(name: String, exercises: [ExerciseDraft]) throws {
-        let plan = WorkoutPlan(userId: userId, name: name)
+    func createPlan(name: String, exercises: [ExerciseDraft], dayOfWeek: DayOfWeek? = nil) throws {
+        let plan = WorkoutPlan(userId: userId, name: name, dayOfWeek: dayOfWeek)
         for draft in exercises {
             plan.exercises.append(Exercise(
                 name: draft.name,
@@ -41,8 +41,9 @@ final class PlansViewModel {
         loadPlans()
     }
 
-    func updatePlan(_ plan: WorkoutPlan, name: String, exercises: [ExerciseDraft]) throws {
+    func updatePlan(_ plan: WorkoutPlan, name: String, exercises: [ExerciseDraft], dayOfWeek: DayOfWeek? = nil) throws {
         plan.name = name
+        plan.dayOfWeek = dayOfWeek
         plan.exercises.removeAll()
         for draft in exercises {
             plan.exercises.append(Exercise(
@@ -67,7 +68,7 @@ final class PlansViewModel {
 
     func generatePlans(from templates: [WorkoutTemplate]) throws {
         for template in templates {
-            let plan = WorkoutPlan(userId: userId, name: template.name)
+            let plan = WorkoutPlan(userId: userId, name: template.name, dayOfWeek: template.dayOfWeek)
             for draft in template.exercises {
                 plan.exercises.append(Exercise(
                     name: draft.name,
@@ -94,4 +95,5 @@ struct WorkoutTemplate: Identifiable {
     let id = UUID()
     let name: String
     let exercises: [ExerciseDraft]
+    var dayOfWeek: DayOfWeek? = nil
 }

@@ -11,6 +11,7 @@ struct PlanEditorView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var planName = ""
+    @State private var selectedDay: DayOfWeek? = nil
     @State private var exercises: [ExerciseDraft] = []
     @State private var errorMessage: String? = nil
 
@@ -24,6 +25,12 @@ struct PlanEditorView: View {
             Form {
                 Section("Plan Name") {
                     TextField("e.g. Push Day", text: $planName)
+                    Picker("Day", selection: $selectedDay) {
+                        Text("Unscheduled").tag(Optional<DayOfWeek>.none)
+                        ForEach(DayOfWeek.allCases, id: \.self) { day in
+                            Text(day.label).tag(Optional(day))
+                        }
+                    }
                 }
 
                 Section("Exercises") {
@@ -75,6 +82,7 @@ struct PlanEditorView: View {
     private func prefill() {
         guard case .edit(let plan) = mode else { return }
         planName = plan.name
+        selectedDay = plan.dayOfWeek
         exercises = plan.exercises.map {
             ExerciseDraft(name: $0.name, targetSets: $0.targetSets, targetReps: $0.targetReps, notes: $0.notes ?? "")
         }
@@ -96,9 +104,9 @@ struct PlanEditorView: View {
         do {
             switch mode {
             case .create:
-                try plansViewModel.createPlan(name: planName, exercises: exercises)
+                try plansViewModel.createPlan(name: planName, exercises: exercises, dayOfWeek: selectedDay)
             case .edit(let plan):
-                try plansViewModel.updatePlan(plan, name: planName, exercises: exercises)
+                try plansViewModel.updatePlan(plan, name: planName, exercises: exercises, dayOfWeek: selectedDay)
             }
             dismiss()
         } catch {

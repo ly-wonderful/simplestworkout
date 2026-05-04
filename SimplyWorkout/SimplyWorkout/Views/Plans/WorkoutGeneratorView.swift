@@ -26,12 +26,20 @@ struct WorkoutGeneratorView: View {
 
                 Section("Plans to create") {
                     ForEach(templates) { template in
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(template.name).font(.headline)
-                            Text(template.exercises.map(\.name).joined(separator: ", "))
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                                .lineLimit(2)
+                        HStack(alignment: .top) {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(template.name).font(.headline)
+                                Text(template.exercises.map(\.name).joined(separator: ", "))
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                    .lineLimit(2)
+                            }
+                            Spacer()
+                            if let day = template.dayOfWeek {
+                                Text(day.label)
+                                    .font(.caption.bold())
+                                    .foregroundStyle(.secondary)
+                            }
                         }
                         .padding(.vertical, 4)
                     }
@@ -69,12 +77,23 @@ struct WorkoutGeneratorView: View {
 private enum WorkoutGenerator {
     static func templates(for days: Int) -> [WorkoutTemplate] {
         switch days {
-        case 2: return [fullBodyA, fullBodyB]
-        case 3: return [push, pull, legs]
-        case 4: return [upperA, lowerA, upperB, lowerB]
-        case 5: return [push, pull, legs, upperA, lowerA]
-        case 6: return [pushA, pullA, legsA, pushB, pullB, legsB]
-        default: return [push, pull, legs]
+        case 2: return [
+            fullBodyA.on(.monday), fullBodyB.on(.thursday)
+        ]
+        case 3: return [
+            push.on(.monday), pull.on(.wednesday), legs.on(.friday)
+        ]
+        case 4: return [
+            upperA.on(.monday), lowerA.on(.tuesday), upperB.on(.thursday), lowerB.on(.friday)
+        ]
+        case 5: return [
+            push.on(.monday), pull.on(.tuesday), legs.on(.wednesday), upperA.on(.thursday), lowerA.on(.friday)
+        ]
+        case 6: return [
+            pushA.on(.monday), pullA.on(.tuesday), legsA.on(.wednesday),
+            pushB.on(.thursday), pullB.on(.friday), legsB.on(.saturday)
+        ]
+        default: return [push.on(.monday), pull.on(.wednesday), legs.on(.friday)]
         }
     }
 
@@ -196,5 +215,11 @@ private enum WorkoutGenerator {
 
     private static func ex(_ name: String, _ sets: Int, _ reps: Int) -> ExerciseDraft {
         ExerciseDraft(name: name, targetSets: sets, targetReps: reps)
+    }
+}
+
+private extension WorkoutTemplate {
+    func on(_ day: DayOfWeek) -> WorkoutTemplate {
+        WorkoutTemplate(name: name, exercises: exercises, dayOfWeek: day)
     }
 }

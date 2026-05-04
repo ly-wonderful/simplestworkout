@@ -59,24 +59,43 @@ struct PlansListView: View {
                 description: Text("Tap + to create your first workout plan.")
             )
         } else {
+            let unscheduled = vm.plans.filter { $0.dayOfWeek == nil }
+            let hasScheduled = vm.plans.contains { $0.dayOfWeek != nil }
             List {
-                ForEach(vm.plans) { plan in
-                    NavigationLink {
-                        PlanDetailView(plan: plan, plansViewModel: vm)
-                    } label: {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(plan.name).font(.headline)
-                            Text("\(plan.exercises.count) exercise\(plan.exercises.count == 1 ? "" : "s")")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
+                ForEach(DayOfWeek.allCases, id: \.self) { day in
+                    let dayPlans = vm.plans.filter { $0.dayOfWeek == day }
+                    if !dayPlans.isEmpty {
+                        Section(day.label) {
+                            planRows(dayPlans, vm: vm)
                         }
-                        .padding(.vertical, 4)
                     }
                 }
-                .onDelete { indexSet in
-                    for index in indexSet { vm.deletePlan(vm.plans[index]) }
+                if !unscheduled.isEmpty {
+                    Section(hasScheduled ? "Unscheduled" : "") {
+                        planRows(unscheduled, vm: vm)
+                    }
                 }
             }
+        }
+    }
+
+    @ViewBuilder
+    private func planRows(_ plans: [WorkoutPlan], vm: PlansViewModel) -> some View {
+        ForEach(plans) { plan in
+            NavigationLink {
+                PlanDetailView(plan: plan, plansViewModel: vm)
+            } label: {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(plan.name).font(.headline)
+                    Text("\(plan.exercises.count) exercise\(plan.exercises.count == 1 ? "" : "s")")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                .padding(.vertical, 4)
+            }
+        }
+        .onDelete { indexSet in
+            for index in indexSet { vm.deletePlan(plans[index]) }
         }
     }
 }

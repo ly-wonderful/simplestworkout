@@ -7,7 +7,9 @@ struct PlanDetailView: View {
     @Environment(DataStore.self) private var dataStore
     @State private var showEditor = false
     @State private var showSession = false
+    @State private var showDeleteAlert = false
     @State private var sessionViewModel: SessionViewModel?
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         List {
@@ -35,8 +37,22 @@ struct PlanDetailView: View {
         .navigationTitle(plan.name)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button("Edit") { showEditor = true }
+                Menu {
+                    Button("Edit") { showEditor = true }
+                    Button("Delete Plan", role: .destructive) { showDeleteAlert = true }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                }
             }
+        }
+        .alert("Delete \"\(plan.name)\"?", isPresented: $showDeleteAlert) {
+            Button("Delete", role: .destructive) {
+                plansViewModel.deletePlan(plan)
+                dismiss()
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This plan will be permanently deleted.")
         }
         .safeAreaInset(edge: .bottom) {
             Button {
