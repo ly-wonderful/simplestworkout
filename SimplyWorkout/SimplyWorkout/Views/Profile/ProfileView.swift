@@ -11,6 +11,14 @@ struct ProfileView: View {
                     LabeledContent("Email", value: authViewModel.currentUserEmail)
                 }
 
+                Section("Resources") {
+                    NavigationLink {
+                        StrategyView()
+                    } label: {
+                        Label("Training Strategy", systemImage: "book.pages")
+                    }
+                }
+
                 Section {
                     Button("Sign Out", role: .destructive) {
                         showSignOutAlert = true

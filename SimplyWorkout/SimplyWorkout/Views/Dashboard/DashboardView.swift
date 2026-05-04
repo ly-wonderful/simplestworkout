@@ -161,7 +161,7 @@ private struct StatCard: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .top) {
                 Image(systemName: icon)
-                    .foregroundStyle(.accent)
+                    .foregroundStyle(Color.accentColor)
                 Spacer()
                 if let delta {
                     HStack(spacing: 2) {
