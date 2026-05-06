@@ -46,6 +46,21 @@ final class DataStore {
         try context.save()
     }
 
+    func fetchLastSets(for exerciseNames: [String], userId: String) throws -> [String: [LoggedSet]] {
+        let sessions = try fetchSessions(for: userId)
+        var result: [String: [LoggedSet]] = [:]
+        for session in sessions {
+            for logged in session.loggedExercises {
+                let name = logged.exerciseName
+                if exerciseNames.contains(name), result[name] == nil, !logged.sets.isEmpty {
+                    result[name] = logged.sets
+                }
+            }
+            if result.count == exerciseNames.count { break }
+        }
+        return result
+    }
+
     func deleteSession(_ session: WorkoutSession) throws {
         context.delete(session)
         try context.save()

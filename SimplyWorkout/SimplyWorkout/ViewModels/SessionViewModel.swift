@@ -9,6 +9,7 @@ final class SessionViewModel {
     var sessionNotes: String = ""
     var isComplete: Bool = false
     var errorMessage: String? = nil
+    var lastSets: [String: [LoggedSet]] = [:]
 
     private let dataStore: DataStore
     private let userId: String
@@ -24,6 +25,8 @@ final class SessionViewModel {
             session.loggedExercises.append(LoggedExercise(exerciseName: exercise.name))
         }
         currentSession = session
+        let names = plan.exercises.map(\.name)
+        lastSets = (try? dataStore.fetchLastSets(for: names, userId: userId)) ?? [:]
     }
 
     func addSet(to exercise: LoggedExercise, reps: Int, weight: Double) {

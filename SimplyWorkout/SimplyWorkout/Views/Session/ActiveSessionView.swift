@@ -43,6 +43,7 @@ struct ActiveSessionView: View {
                 Text("Mark this workout as complete and save it?")
             }
             .interactiveDismissDisabled()
+            .onAppear { prefillFromLastSession() }
         }
         .onChange(of: sessionViewModel.isComplete) { _, complete in
             if complete { dismiss() }
@@ -51,7 +52,9 @@ struct ActiveSessionView: View {
 
     @ViewBuilder
     private func exerciseSection(exercise: LoggedExercise) -> some View {
-        Section(exercise.exerciseName) {
+        Section {
+            lastSessionRow(for: exercise)
+
             if exercise.sets.isEmpty {
                 Text("No sets logged yet.")
                     .foregroundStyle(.secondary)
@@ -61,7 +64,7 @@ struct ActiveSessionView: View {
                     HStack {
                         Text("\(set.reps) reps")
                         Spacer()
-                        Text(String(format: "%.1f lbs", set.weight))
+                        Text(set.weight == 0 ? "Bodyweight" : String(format: "%.1f lbs", set.weight))
                             .foregroundStyle(.secondary)
                     }
                 }
@@ -90,6 +93,34 @@ struct ActiveSessionView: View {
                     .buttonStyle(.borderedProminent)
                     .controlSize(.small)
             }
+        } header: {
+            Text(exercise.exerciseName)
+        }
+    }
+
+    @ViewBuilder
+    private func lastSessionRow(for exercise: LoggedExercise) -> some View {
+        if let sets = sessionViewModel.lastSets[exercise.exerciseName], !sets.isEmpty {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(spacing: 4) {
+                    Image(systemName: "clock.arrow.circlepath")
+                        .font(.caption2)
+                    Text("Last session")
+                        .font(.caption2.bold())
+                }
+                .foregroundStyle(.secondary)
+
+                let summary = sets.map { set -> String in
+                    let w = set.weight == 0 ? "BW" : String(format: "%.0f lbs", set.weight)
+                    return "\(w) × \(set.reps)"
+                }.joined(separator: "  ·  ")
+
+                Text(summary)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.vertical, 2)
+            .listRowBackground(Color.accentColor.opacity(0.06))
         }
     }
 
@@ -118,5 +149,19 @@ struct ActiveSessionView: View {
         guard repsVal > 0 else { return }
         let weightVal = Double(weights[exercise.id] ?? "") ?? 0
         sessionViewModel.addSet(to: exercise, reps: repsVal, weight: weightVal)
+    }
+
+    private func prefillFromLastSession() {
+        guard let session = sessionViewModel.currentSession else { return }
+        for exercise in session.loggedExercises {
+            guard let sets = sessionViewModel.lastSets[exercise.exerciseName],
+                  let first = sets.first else { continue }
+            if reps[exercise.id] == nil {
+                reps[exercise.id] = first.reps
+            }
+            if weights[exercise.id] == nil {
+                weights[exercise.id] = first.weight == 0 ? "" : String(format: "%.1f", first.weight)
+            }
+        }
     }
 }

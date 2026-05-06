@@ -14,6 +14,7 @@ struct PlanEditorView: View {
     @State private var selectedDay: DayOfWeek? = nil
     @State private var exercises: [ExerciseDraft] = []
     @State private var errorMessage: String? = nil
+    @State private var showExercisePicker = false
 
     private var isEditing: Bool {
         if case .edit = mode { return true }
@@ -56,6 +57,11 @@ struct PlanEditorView: View {
                     } label: {
                         Label("Add Exercise", systemImage: "plus.circle")
                     }
+                    Button {
+                        showExercisePicker = true
+                    } label: {
+                        Label("Browse ExerciseDB", systemImage: "magnifyingglass")
+                    }
                 }
                 .environment(\.editMode, .constant(.active))
 
@@ -76,6 +82,11 @@ struct PlanEditorView: View {
                 }
             }
             .onAppear { prefill() }
+            .sheet(isPresented: $showExercisePicker) {
+                ExercisePickerView { item in
+                    exercises.append(ExerciseDraft(name: item.name.capitalized))
+                }
+            }
         }
     }
 

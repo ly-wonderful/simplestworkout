@@ -3,6 +3,7 @@ import SwiftUI
 struct ProfileView: View {
     @Environment(AuthViewModel.self) private var authViewModel
     @State private var showSignOutAlert = false
+    @AppStorage("exerciseDBApiKey") private var exerciseDBApiKey = ""
 
     var body: some View {
         NavigationStack {
@@ -11,12 +12,15 @@ struct ProfileView: View {
                     LabeledContent("Email", value: authViewModel.currentUserEmail)
                 }
 
-                Section("Resources") {
-                    NavigationLink {
-                        StrategyView()
-                    } label: {
-                        Label("Training Strategy", systemImage: "book.pages")
+                Section {
+                    LabeledContent("ExerciseDB Key") {
+                        SecureField("RapidAPI key", text: $exerciseDBApiKey)
+                            .multilineTextAlignment(.trailing)
                     }
+                } header: {
+                    Text("API Keys")
+                } footer: {
+                    Text("Required to browse exercises from ExerciseDB when creating plans.")
                 }
 
                 Section {
