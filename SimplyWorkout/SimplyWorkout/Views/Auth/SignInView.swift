@@ -10,7 +10,7 @@ struct SignInView: View {
         VStack(spacing: 24) {
             Spacer()
 
-            Text("SimplyWorkout")
+            Text("SimplestWorkout")
                 .font(.largeTitle.bold())
 
             VStack(spacing: 16) {
