@@ -15,3 +15,6 @@ SourcePackages/
 
 # Firebase credentials — add manually per device
 GoogleService-Info.plist
+
+SimplyWorkout.md
+
