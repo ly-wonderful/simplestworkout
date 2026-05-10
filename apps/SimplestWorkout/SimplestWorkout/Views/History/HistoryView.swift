@@ -2,6 +2,7 @@ import SwiftUI
 import SwiftData
 
 struct HistoryView: View {
+    @Environment(\.modelContext) private var modelContext
     @Query(sort: \WorkoutSession.startedAt, order: .reverse) private var sessions: [WorkoutSession]
 
     var body: some View {
@@ -22,6 +23,7 @@ struct HistoryView: View {
                         .padding(.vertical, 2)
                     }
                 }
+                .onDelete(perform: deleteSessions)
             }
             .navigationTitle("History")
             .navigationDestination(for: WorkoutSession.self) { session in
@@ -36,6 +38,12 @@ struct HistoryView: View {
                     )
                 }
             }
+        }
+    }
+
+    private func deleteSessions(offsets: IndexSet) {
+        for index in offsets {
+            modelContext.delete(sessions[index])
         }
     }
 
