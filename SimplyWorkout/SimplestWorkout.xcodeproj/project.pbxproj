@@ -10,27 +10,8 @@
 		352730642FA7BDFF00A530B4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 352730632FA7BDFF00A530B4 /* FirebaseAuth */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		352730462FA7BDC100A530B4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3527302B2FA7BDC100A530B4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 352730322FA7BDC100A530B4;
-			remoteInfo = SimplyWorkout;
-		};
-		352730502FA7BDC100A530B4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3527302B2FA7BDC100A530B4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 352730322FA7BDC100A530B4;
-			remoteInfo = SimplyWorkout;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		352730332FA7BDC100A530B4 /* SimplyWorkout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimplyWorkout.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		352730452FA7BDC100A530B4 /* SimplyWorkoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplyWorkoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3527304F2FA7BDC100A530B4 /* SimplyWorkoutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplyWorkoutUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -60,20 +41,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		352730422FA7BDC100A530B4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3527304C2FA7BDC100A530B4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -91,8 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				352730332FA7BDC100A530B4 /* SimplyWorkout.app */,
-				352730452FA7BDC100A530B4 /* SimplyWorkoutTests.xctest */,
-				3527304F2FA7BDC100A530B4 /* SimplyWorkoutUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -123,52 +88,6 @@
 			productReference = 352730332FA7BDC100A530B4 /* SimplyWorkout.app */;
 			productType = "com.apple.product-type.application";
 		};
-		352730442FA7BDC100A530B4 /* SimplyWorkoutTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3527305C2FA7BDC100A530B4 /* Build configuration list for PBXNativeTarget "SimplyWorkoutTests" */;
-			buildPhases = (
-				352730412FA7BDC100A530B4 /* Sources */,
-				352730422FA7BDC100A530B4 /* Frameworks */,
-				352730432FA7BDC100A530B4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				352730472FA7BDC100A530B4 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				352730482FA7BDC100A530B4 /* SimplyWorkoutTests */,
-			);
-			name = SimplyWorkoutTests;
-			packageProductDependencies = (
-			);
-			productName = SimplyWorkoutTests;
-			productReference = 352730452FA7BDC100A530B4 /* SimplyWorkoutTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		3527304E2FA7BDC100A530B4 /* SimplyWorkoutUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3527305F2FA7BDC100A530B4 /* Build configuration list for PBXNativeTarget "SimplyWorkoutUITests" */;
-			buildPhases = (
-				3527304B2FA7BDC100A530B4 /* Sources */,
-				3527304C2FA7BDC100A530B4 /* Frameworks */,
-				3527304D2FA7BDC100A530B4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				352730512FA7BDC100A530B4 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				352730522FA7BDC100A530B4 /* SimplyWorkoutUITests */,
-			);
-			name = SimplyWorkoutUITests;
-			packageProductDependencies = (
-			);
-			productName = SimplyWorkoutUITests;
-			productReference = 3527304F2FA7BDC100A530B4 /* SimplyWorkoutUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -181,14 +100,6 @@
 				TargetAttributes = {
 					352730322FA7BDC100A530B4 = {
 						CreatedOnToolsVersion = 16.1;
-					};
-					352730442FA7BDC100A530B4 = {
-						CreatedOnToolsVersion = 16.1;
-						TestTargetID = 352730322FA7BDC100A530B4;
-					};
-					3527304E2FA7BDC100A530B4 = {
-						CreatedOnToolsVersion = 16.1;
-						TestTargetID = 352730322FA7BDC100A530B4;
 					};
 				};
 			};
@@ -210,28 +121,12 @@
 			projectRoot = "";
 			targets = (
 				352730322FA7BDC100A530B4 /* SimplyWorkout */,
-				352730442FA7BDC100A530B4 /* SimplyWorkoutTests */,
-				3527304E2FA7BDC100A530B4 /* SimplyWorkoutUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		352730312FA7BDC100A530B4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		352730432FA7BDC100A530B4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3527304D2FA7BDC100A530B4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -248,34 +143,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		352730412FA7BDC100A530B4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3527304B2FA7BDC100A530B4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		352730472FA7BDC100A530B4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 352730322FA7BDC100A530B4 /* SimplyWorkout */;
-			targetProxy = 352730462FA7BDC100A530B4 /* PBXContainerItemProxy */;
-		};
-		352730512FA7BDC100A530B4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 352730322FA7BDC100A530B4 /* SimplyWorkout */;
-			targetProxy = 352730502FA7BDC100A530B4 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		352730572FA7BDC100A530B4 /* Debug */ = {
@@ -459,78 +327,6 @@
 			};
 			name = Release;
 		};
-		3527305D2FA7BDC100A530B4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = JQDA9JNNUT;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = CompOne.SimplyWorkoutTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimplyWorkout.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SimplyWorkout";
-			};
-			name = Debug;
-		};
-		3527305E2FA7BDC100A530B4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = JQDA9JNNUT;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = CompOne.SimplyWorkoutTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimplyWorkout.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SimplyWorkout";
-			};
-			name = Release;
-		};
-		352730602FA7BDC100A530B4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = JQDA9JNNUT;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = CompOne.SimplyWorkoutUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SimplyWorkout;
-			};
-			name = Debug;
-		};
-		352730612FA7BDC100A530B4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = JQDA9JNNUT;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = CompOne.SimplyWorkoutUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SimplyWorkout;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -548,24 +344,6 @@
 			buildConfigurations = (
 				3527305A2FA7BDC100A530B4 /* Debug */,
 				3527305B2FA7BDC100A530B4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3527305C2FA7BDC100A530B4 /* Build configuration list for PBXNativeTarget "SimplyWorkoutTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3527305D2FA7BDC100A530B4 /* Debug */,
-				3527305E2FA7BDC100A530B4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3527305F2FA7BDC100A530B4 /* Build configuration list for PBXNativeTarget "SimplyWorkoutUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				352730602FA7BDC100A530B4 /* Debug */,
-				352730612FA7BDC100A530B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
