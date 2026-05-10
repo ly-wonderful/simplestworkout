@@ -23,6 +23,7 @@ struct PlansListView: View {
                 }
                 .onDelete(perform: deletePlans)
             }
+            .customBackground()
             .navigationTitle("My Plans")
             .navigationDestination(for: WorkoutPlan.self) { plan in
                 PlanDetailView(plan: plan)

@@ -31,6 +31,7 @@ struct SimplestWorkoutApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(BackgroundManager.shared)
         }
         .modelContainer(sharedModelContainer)
     }

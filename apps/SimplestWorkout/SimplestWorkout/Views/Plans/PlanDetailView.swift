@@ -79,6 +79,7 @@ struct PlanDetailView: View {
                 }
             }
         }
+        .customBackground()
         .navigationTitle(plan.name)
         .navigationBarTitleDisplayMode(.large)
         .toolbar {

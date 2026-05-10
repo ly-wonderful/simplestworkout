@@ -87,6 +87,7 @@ struct ActiveSessionView: View {
                     }
                 }
             }
+            .customBackground()
             .navigationTitle(planName)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

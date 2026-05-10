@@ -25,6 +25,7 @@ struct HistoryView: View {
                 }
                 .onDelete(perform: deleteSessions)
             }
+            .customBackground()
             .navigationTitle("History")
             .navigationDestination(for: WorkoutSession.self) { session in
                 SessionDetailView(session: session)

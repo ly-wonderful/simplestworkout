@@ -34,6 +34,7 @@ struct SessionDetailView: View {
                 }
             }
         }
+        .customBackground()
         .navigationTitle(session.planName)
         .navigationBarTitleDisplayMode(.inline)
     }
