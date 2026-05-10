@@ -1,0 +1,22 @@
+# Xcode user data
+xcuserdata/
+*.xcuserstate
+*.xcschememanagement.plist
+
+# Build products
+build/
+DerivedData/
+
+# OS files
+.DS_Store
+
+# CocoaPods / SPM
+Pods/
+.build/
+
+# Archives
+*.xcarchive
+
+# Provisioning profiles
+*.mobileprovision
+*.provisionprofile
