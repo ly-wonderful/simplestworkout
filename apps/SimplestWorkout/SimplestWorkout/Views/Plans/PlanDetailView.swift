@@ -4,6 +4,7 @@ import SwiftData
 struct PlanDetailView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.openURL) private var openURL
     let plan: WorkoutPlan
     @State private var showingEditor = false
     @State private var showingDeleteAlert = false
@@ -21,17 +22,27 @@ struct PlanDetailView: View {
                 let isToday = day.weekday == today
                 Section {
                     ForEach(day.exercises) { exercise in
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(exercise.name)
-                                .fontWeight(.medium)
-                            Text("\(exercise.targetSets) sets × \(exercise.targetReps) reps")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                            if !exercise.notes.isEmpty {
-                                Text(exercise.notes)
+                        HStack {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(exercise.name)
+                                    .fontWeight(.medium)
+                                Text("\(exercise.targetSets) sets × \(exercise.targetReps) reps")
                                     .font(.caption)
-                                    .foregroundStyle(.tertiary)
+                                    .foregroundStyle(.secondary)
+                                if !exercise.notes.isEmpty {
+                                    Text(exercise.notes)
+                                        .font(.caption)
+                                        .foregroundStyle(.tertiary)
+                                }
                             }
+                            Spacer()
+                            Button {
+                                searchExercise(exercise.name)
+                            } label: {
+                                Image(systemName: "questionmark.circle")
+                                    .foregroundStyle(.secondary)
+                            }
+                            .buttonStyle(.plain)
                         }
                         .padding(.vertical, 2)
                     }
@@ -126,6 +137,13 @@ struct PlanDetailView: View {
             Button("Cancel", role: .cancel) {}
         } message: {
             Text("This will permanently delete \"\(plan.name)\" and all its routines.")
+        }
+    }
+
+    private func searchExercise(_ name: String) {
+        let query = "\(name) exercise form".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? name
+        if let url = URL(string: "https://www.google.com/search?tbm=isch&q=\(query)") {
+            openURL(url)
         }
     }
 }

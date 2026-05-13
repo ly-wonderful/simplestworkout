@@ -4,6 +4,7 @@ import SwiftData
 struct ActiveSessionView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.openURL) private var openURL
     @AppStorage("weightUnit") private var weightUnit = "lbs"
 
     let planName: String
@@ -38,7 +39,18 @@ struct ActiveSessionView: View {
                 }
 
                 ForEach(exerciseLogs.indices, id: \.self) { exIdx in
-                    Section(exerciseLogs[exIdx].name) {
+                    Section(header: HStack {
+                        Text(exerciseLogs[exIdx].name)
+                        Spacer()
+                        Button {
+                            searchExercise(exerciseLogs[exIdx].name)
+                        } label: {
+                            Image(systemName: "questionmark.circle")
+                                .font(.caption)
+                        }
+                        .buttonStyle(.plain)
+                        .textCase(nil)
+                    }) {
                         ForEach(exerciseLogs[exIdx].sets.indices, id: \.self) { setIdx in
                             let lastReps = exerciseLogs[exIdx].sets[setIdx].lastReps
                             let lastWeight = exerciseLogs[exIdx].sets[setIdx].lastWeight
@@ -165,6 +177,13 @@ struct ActiveSessionView: View {
 
     private func formatWeight(_ w: Double) -> String {
         w.truncatingRemainder(dividingBy: 1) == 0 ? "\(Int(w))" : String(format: "%.1f", w)
+    }
+
+    private func searchExercise(_ name: String) {
+        let query = "\(name) exercise form".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? name
+        if let url = URL(string: "https://www.google.com/search?tbm=isch&q=\(query)") {
+            openURL(url)
+        }
     }
 }
 
