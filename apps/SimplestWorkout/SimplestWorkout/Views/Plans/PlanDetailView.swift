@@ -22,29 +22,7 @@ struct PlanDetailView: View {
                 let isToday = day.weekday == today
                 Section {
                     ForEach(day.exercises) { exercise in
-                        HStack {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(exercise.name)
-                                    .fontWeight(.medium)
-                                Text("\(exercise.targetSets) sets × \(exercise.targetReps) reps")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                                if !exercise.notes.isEmpty {
-                                    Text(exercise.notes)
-                                        .font(.caption)
-                                        .foregroundStyle(.tertiary)
-                                }
-                            }
-                            Spacer()
-                            Button {
-                                searchExercise(exercise.name)
-                            } label: {
-                                Image(systemName: "questionmark.circle")
-                                    .foregroundStyle(.secondary)
-                            }
-                            .buttonStyle(.plain)
-                        }
-                        .padding(.vertical, 2)
+                        exerciseRow(exercise)
                     }
 
                     if day.exercises.isEmpty {
@@ -138,6 +116,33 @@ struct PlanDetailView: View {
         } message: {
             Text("This will permanently delete \"\(plan.name)\" and all its routines.")
         }
+    }
+
+    private func exerciseRow(_ exercise: Exercise) -> some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(exercise.name)
+                    .fontWeight(.medium)
+                Text("\(exercise.targetSets) sets × \(exercise.targetReps) reps")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                if !exercise.notes.isEmpty {
+                    Text(exercise.notes)
+                        .font(.caption)
+                        .foregroundStyle(.tertiary)
+                }
+            }
+            Spacer()
+            Button {
+                searchExercise(exercise.name)
+            } label: {
+                Label("How to", systemImage: "photo.on.rectangle.angled")
+                    .font(.caption)
+                    .foregroundColor(.accentColor)
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(.vertical, 2)
     }
 
     private func searchExercise(_ name: String) {

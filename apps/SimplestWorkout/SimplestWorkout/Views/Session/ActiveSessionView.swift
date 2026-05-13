@@ -39,18 +39,7 @@ struct ActiveSessionView: View {
                 }
 
                 ForEach(exerciseLogs.indices, id: \.self) { exIdx in
-                    Section(header: HStack {
-                        Text(exerciseLogs[exIdx].name)
-                        Spacer()
-                        Button {
-                            searchExercise(exerciseLogs[exIdx].name)
-                        } label: {
-                            Image(systemName: "questionmark.circle")
-                                .font(.caption)
-                        }
-                        .buttonStyle(.plain)
-                        .textCase(nil)
-                    }) {
+                    Section {
                         ForEach(exerciseLogs[exIdx].sets.indices, id: \.self) { setIdx in
                             let lastReps = exerciseLogs[exIdx].sets[setIdx].lastReps
                             let lastWeight = exerciseLogs[exIdx].sets[setIdx].lastWeight
@@ -96,6 +85,8 @@ struct ActiveSessionView: View {
                             Label("Add Set", systemImage: "plus.circle")
                                 .font(.subheadline)
                         }
+                    } header: {
+                        exerciseHeader(exerciseLogs[exIdx].name)
                     }
                 }
             }
@@ -177,6 +168,22 @@ struct ActiveSessionView: View {
 
     private func formatWeight(_ w: Double) -> String {
         w.truncatingRemainder(dividingBy: 1) == 0 ? "\(Int(w))" : String(format: "%.1f", w)
+    }
+
+    private func exerciseHeader(_ name: String) -> some View {
+        HStack {
+            Text(name)
+            Spacer()
+            Button {
+                searchExercise(name)
+            } label: {
+                Label("How to", systemImage: "photo.on.rectangle.angled")
+                    .font(.caption)
+                    .foregroundColor(.accentColor)
+            }
+            .buttonStyle(.plain)
+            .textCase(nil)
+        }
     }
 
     private func searchExercise(_ name: String) {
